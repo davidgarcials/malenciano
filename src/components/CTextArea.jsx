@@ -3,17 +3,21 @@ import { Input } from "antd";
 
 const { TextArea } = Input;
 
-const CTextArea = () => {
-  const onChange = (e) => {
-    console.log("Change:", e.target.value);
+const CTextArea = ({ onChange = undefined, placeholder, readOnly = false, value = undefined }) => {
+  const handleOnChange = (e) => {
+    onChange(e.target.value)
   };
 
   return (
     <TextArea
-      showCount={true}
+      showCount
+      placeholder={placeholder}
       maxLength={100}
-      style={{ height: 120 }}
-      onChange={onChange}
+      onChange={handleOnChange}
+      disabled={readOnly}
+      rows={10}
+      autoSize={true}
+      {...(value && { value })}
     />
   );
 };
